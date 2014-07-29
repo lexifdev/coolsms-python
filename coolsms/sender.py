@@ -29,6 +29,7 @@ class Sender(object):
         timestamp, salt, signature = self._auth_info()
 
         params = {
+            'api_key': self._key,
             'timestamp': timestamp,
             'salt': salt,
             'signature': signature,
