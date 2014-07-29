@@ -19,7 +19,7 @@ class Sender(object):
 
     def _auth_info(self):
         timestamp = int(time.time())
-        salt = uuid.uuid4()
+        salt = str(uuid.uuid4())
         data = str(timestamp) + salt
         hash = hmac.new(self._secret, data, hashlib.md5)
 
