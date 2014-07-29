@@ -9,5 +9,7 @@ setup(
     install_requires = ['requests==2.3.0'],
     author = 'lexifdev',
     author_email = 'lexifdev@lxf.kr',
-    description = '''Simple python library for korean SMS service provider CoolSMS(coolsms.co.kr)'''
+    description = '''Simple python library for korean SMS service provider CoolSMS(coolsms.co.kr)''',
+    license = 'BSD',
+    platforms = 'any',
 )
