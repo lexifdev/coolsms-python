@@ -1,11 +1,13 @@
-coolsms-python
-==============
-
+#coolsms-python
 Simple python library for korean SMS service provider CoolSMS(coolsms.co.kr)
 
-Basic Usage
---------------
 
+##Installation
+```
+pip install coolsms
+```
+
+##Basic Usage
 ```
 from coolsms import Sender
 
@@ -20,4 +22,3 @@ sender.send(
     'Test Message'
 )
 ```
-
