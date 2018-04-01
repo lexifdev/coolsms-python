@@ -1,13 +1,16 @@
-#coolsms-python
-Simple python library for korean SMS service provider CoolSMS(coolsms.co.kr)
+
+# coolsms-python
+~Simple python library for korean SMS service provider CoolSMS(coolsms.co.kr)~
+
+Not maintain anymore. Use official SDK instead. https://www.coolsms.co.kr/Python_SDK_Start_here
 
 
-##Installation
+## Installation
 ```
 pip install coolsms
 ```
 
-##Basic Usage
+## Basic Usage
 ```
 from coolsms import Sender
 
