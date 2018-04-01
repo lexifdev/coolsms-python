@@ -1,1 +1,1 @@
-from sender import Sender
+from .sender import Sender

@@ -1,45 +1,34 @@
-import time
 import hashlib
 import hmac
-import uuid
+import secrets
 import requests
+from datetime import datetime
 
 
 class Sender(object):
-    _host = 'api.coolsms.co.kr'
-    _version = '1'
-
     def __init__(self, key, secret):
         self._key = key
         self._secret = secret
-        self._base_url = 'https://{host}/{version}/'.format(
-            host=self._host,
-            version=self._version
-        )
 
-    def _auth_info(self):
-        timestamp = int(time.time())
-        salt = str(uuid.uuid4())
-        data = str(timestamp) + salt
-        hash = hmac.new(self._secret, data, hashlib.md5)
-
-        return timestamp, salt, hash.hexdigest()
+    def _auth_params(self):
+        ts = int(datetime.now().timestamp())
+        salt = secrets.token_hex(8)
+        key = self._secret.encode('utf8')
+        msg = '{}{}'.format(ts, salt).encode('utf8')
+        sign = hmac.new(key, msg, hashlib.md5)
+        return {
+            'api_key': self._key,
+            'timestamp': ts,
+            'salt': salt,
+            'signature': sign.hexdigest(),
+        }
 
     def send(self, sender, receiver, text):
-        timestamp, salt, signature = self._auth_info()
-
-        params = {
-            'api_key': self._key,
-            'timestamp': timestamp,
-            'salt': salt,
-            'signature': signature,
-
+        base_params = self._auth_params()
+        params = base_params.update({
             'from': sender,
             'to': receiver,
             'text': text,
-        }
-        url = self._base_url + 'send'
-
-        response = requests.post(url, data=params)
-
+        })
+        response = requests.post('https://api.coolsms.co.kr/sms/2/send', data=params)
         return response.json()
