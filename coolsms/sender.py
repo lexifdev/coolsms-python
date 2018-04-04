@@ -24,11 +24,16 @@ class Sender(object):
         }
 
     def send(self, sender, receiver, text):
+        if len(text.encode('euc-kr')) > 80:
+            msg_type = 'LMS'
+        else:
+            msg_type = 'SMS'
         params = self._auth_params()
         params.update({
             'from': sender,
             'to': receiver,
             'text': text,
+            'type': msg_type,
         })
         response = requests.post('https://api.coolsms.co.kr/sms/2/send', data=params)
         return response.json()
