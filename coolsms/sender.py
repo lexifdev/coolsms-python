@@ -24,8 +24,8 @@ class Sender(object):
         }
 
     def send(self, sender, receiver, text):
-        base_params = self._auth_params()
-        params = base_params.update({
+        params = self._auth_params()
+        params.update({
             'from': sender,
             'to': receiver,
             'text': text,
