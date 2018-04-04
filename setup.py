@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='coolsms',
-    version='0.2',
+    version='0.3',
     packages=['coolsms'],
 
     install_requires=[
